@@ -7,6 +7,12 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getCLocation();
+  }
+
   void getCLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
@@ -25,7 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               color: Colors.blue,
               onPressed: () {
                 //print('hello world');
-                getCLocation();
+                //getCLocation();
               },
               child: Text('Get Location'),
             ),
