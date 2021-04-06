@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 void main() {
   performTask();
@@ -29,3 +30,18 @@ void task3(String ttd) {
   String result = "task 3 data";
   print('Task 3 complete with $ttd');
 }
+
+String myMargin = 'abc';
+double myMarginAsDouble;
+// try {
+// myMarginAsDouble = double.parse(myMargin);
+// } catch (e) {
+// //myMarginAsDouble = 30.0;
+// print(e);
+// }
+// return Scaffold(
+// body: Container(
+// margin: EdgeInsets.all(myMarginAsDouble ?? 30.0),
+// color: Colors.green,
+// ),
+// );

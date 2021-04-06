@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -14,10 +15,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getCLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
+    try {
+      //throwWith10(13);
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      print(position);
+    } catch (e) {
+      print(e);
+    }
   }
+
+  // void throwWith10(int n) {
+  //   if (n > 10) {
+  //     throw 'n should be greater than 10';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
