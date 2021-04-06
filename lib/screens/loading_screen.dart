@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:clima/services/location.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -11,18 +11,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getCLocation();
+    getLocation();
   }
 
-  void getCLocation() async {
-    try {
-      //throwWith10(13);
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
-      print(position);
-    } catch (e) {
-      print(e);
-    }
+  void getLocation() async {
+    Location location = Location();
+    await location.getCurrentLocation();
+    print(location.latitude);
+    print(location.longitude);
   }
 
   // void throwWith10(int n) {
@@ -41,10 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             // ignore: deprecated_member_use
             child: RaisedButton(
               color: Colors.blue,
-              onPressed: () {
-                //print('hello world');
-                //getCLocation();
-              },
+              onPressed: () {},
               child: Text('Get Location'),
             ),
           ),
