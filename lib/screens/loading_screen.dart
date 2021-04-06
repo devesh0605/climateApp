@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/services/location.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -29,7 +30,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
       String data = response.body;
-      print(data);
+      var decodeData = jsonDecode(data);
+      int condition = decodeData['weather'][0]['id'];
+      print(condition);
+      double temperature = decodeData['main']['temp'];
+      print(temperature);
+      String cityName = decodeData['name'];
+      print(cityName);
     } else {
       print(response.statusCode);
     }
