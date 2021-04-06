@@ -1,9 +1,9 @@
+import 'package:clima/screens/location_screen.dart';
 import 'package:clima/services/networking.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/services/location.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const apiKey = '882b25a01a571baf4c8374e63d8455b5';
 
@@ -15,12 +15,11 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   double latitude;
   double longitude;
-  String data = 'demo';
 
   @override
   void initState() {
     super.initState();
-    //getLocationData();
+    getLocationData();
   }
 
   void getLocationData() async {
@@ -32,7 +31,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey';
     NetworkHelper networkHelper = NetworkHelper(url: urlu);
     var weatherData = await networkHelper.getData();
-    data = (weatherData).toString();
+    //print(weatherData);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen();
+    }));
     // int condition = weatherData['weather'][0]['id'];
     //
     // double temperature = weatherData['main']['temp'];
@@ -52,25 +54,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              color: Colors.red,
-              onPressed: () {
-                setState(() {
-                  getLocationData();
-                });
-              },
-              child: Text('Get Location'),
-            ),
-          ),
-          Center(
-            child: Text(data),
-          )
-        ],
+      body: Center(
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
+        ),
       ),
     );
   }
